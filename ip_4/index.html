@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customized T-Shirt Order Form</title>
+ <script>
+        // Function to validate the form data
+        function validateForm() {
+            // Get the values from the form
+            var tagline = document.getElementById("tagline").value;
+           var color = document.getElementById("color").value;
+            var size = document.getElementById("size").value;
+            var quantity = document.getElementById("quantity").value;
+            var deliveryDate = document.getElementById("delivery_date").value;
+            var phoneNumber = document.getElementById("phone_number").value;
+            var additionalDetails = document.getElementById("additional_details").value;
+
+            
+            // Validate tagline length
+            if (tagline.length > 50) {
+                alert("Tagline should be less than 50 characters.");
+                return false;
+            }
+
+            // Validate quantity (must be a positive number)
+            if (quantity <= 0) {
+                alert("Quantity must be a positive number.");
+                return false;
+            }
+            
+            var phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                alert("Invalid phone number. Please enter a 10-digit Indian phone number.");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Function to process the order and generate a receipt
+        function processOrder() {
+            if (validateForm()) {
+                var tagline = document.getElementById("tagline").value;
+                var color = document.getElementById("color").value;
+                var size = document.getElementById("size").value;
+                var quantity = document.getElementById("quantity").value;
+                var deliveryDate = document.getElementById("delivery_date").value;
+                var phoneNumber = document.getElementById("phone_number").value;
+                var additionalDetails = document.getElementById("additional_details").value;
+
+                // Create a Date object for the receipt
+                var receiptDate = new Date();
+
+                // Create a Person object
+                function Person(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                // Arrow function as a member function
+                Person.prototype.displayDetails = () => {
+                    console.log(`Name: ${this.name}, Age: ${this.age}`);
+                };
+
+                var person = new Person("John Doe", 30);
+
+                // Display person details
+                person.displayDetails();
+
+                // Create a Student class inheriting from Person
+                class Student extends Person {
+                    constructor(name, age, rollNo) {
+                        super(name, age);
+                        this.rollNo = rollNo;
+                    }
+
+                    // Override displayDetails method
+                    displayDetails() {
+                        console.log(`Name: ${this.name}, Age: ${this.age}, Roll No: ${this.rollNo}`);
+                    }
+                }
+
+                // Demonstrate super and overriding
+                var student = new Student("Alice Smith", 25, "A123");
+
+                // Display student details
+                student.displayDetails();
+
+                // Generate receipt
+                var receipt = `
+                    Order Receipt:
+                    Tagline: ${tagline}
+                    Color: ${color}
+                    Size: ${size}
+                    Quantity: ${quantity}
+                    Delivery Date: ${deliveryDate}
+                    Phone Number: ${phoneNumber}
+                    Additional Details: ${additionalDetails}
+                    Receipt Date: ${receiptDate}
+                `;
+
+                alert(receipt);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div align="center" style="background-color:#FAFAD2">
+    <h1>Customized T-Shirt Order Form</h1>
+  
+     <form action="javascript:void(0);" onsubmit="processOrder();">
+            
+        <div>
+            <label for="tagline">Tagline on the Shirt:</label>
+            <input type="text" id="tagline" name="tagline" required placeholder="Enter your tagline here">
+        </div>
+<br/>
+        <div>
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required placeholder="Enter the color of the T-shirt">
+        </div>
+        <br/>
+        <div>
+            <label for="size">Size:</label>
+            <select id="size" name="size" required>
+                <option value="">Select Size</option>
+                <option value="S">Small</option>
+                <option value="M">Medium</option>
+                <option value="L">Large</option>
+                <option value="XL">Extra Large</option>
+            </select>
+        </div>
+        <br/>
+        <div>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required placeholder="Enter the quantity">
+        </div>
+        <br/>
+        <div>
+            <label for="delivery_date">Date of Delivery:</label>
+            <input type="date" id="delivery_date" name="delivery_date" required>
+        </div>
+        <br/>
+        <div>
+              <div>
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required placeholder="Enter your phone number">
+            </div>
+            <label for="additional_details">Additional Details:</label>
+            <br/>
+            <textarea id="additional_details" name="additional_details" rows="4" cols="40" placeholder="Enter any additional details"></textarea>
+        </div>
+        <br/>
+        <div>
+
+            <input type="submit" value="Place Order">
+        
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
